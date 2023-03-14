@@ -9,12 +9,26 @@ import { TransactionList } from './components/TransactionList';
 import { AddTransaction } from './components/AddTransaction';
 
 import { GlobalProvider } from './context/GlobalState';
+import { LoginForm } from './components/LoginForm';
 
 function App() {
   const count = useRef(0);
   const [userName, setUserName] = useState('');
   const inputName = useRef();
   const prevName = useRef();
+  const [formValues, setFormValues] = useState({
+    nickname: '',
+    email: '',
+    zipcode: '',
+  });
+
+  const registerForm = () => {
+    setFormValues({
+      nickname: 'Achilles',
+      email: 'achilles@gmail.com',
+      zipcode: 'AZ012345',
+    });
+  };
 
   useEffect(() => {
     count.current = count.current + 1;
@@ -34,6 +48,12 @@ function App() {
 
   return (
     <div className="App">
+      <div>
+        <LoginForm registerForm={formValues} />
+        <div>
+          <button onClick={() => registerForm()}>Register</button>
+        </div>
+      </div>
       {/* <div>
         <input
           ref={inputName}
